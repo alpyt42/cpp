@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:12:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/26 11:34:40 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:55:13 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,23 @@ bool	PhoneBook::check_number(std::string str){
 			if (!isdigit(str[i]))
 				return (false);
 		}
+	return(true);
+}
+
+bool	PhoneBook::control_string(std::string str){
+	int	count = 0;
+	for (int i = 0; str[i]; i++){
+			if (!isalnum(str[i]) && str[i] != ' '){
+				std::cout << "Please enter alphanumeric characters or spaces." << std::endl;
+				return (false);
+			}
+			if (isalnum(str[i]))
+				count++;
+		}
+	if (!count){
+		std::cout << "The string does not contain alphanumeric characters, please try again." << std::endl;
+		return (false);
+	}
 	return(true);
 }
 
@@ -117,6 +134,8 @@ void	PhoneBook::get_contactinfo(void)
 				std::cout << std::endl << "Contact configuration failed.";
 				return ;
 			}
+			if (!control_string(inputs[i]))
+				inputs[i] = "";
 			if (i == 3 && !check_number(inputs[i])){
 				std::cout << "The phone number must be composed only by numbers." << std::endl;
 				inputs[i] = "";

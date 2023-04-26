@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:12:50 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/25 19:21:16 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:45:31 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class PhoneBook {
 	void		display_contact(void);
 	void		displaythecontact(int index);
 	bool		check_number(std::string str);
+	bool		control_string(std::string str);
 	std::string	format(std::string str);
 
 	private:
