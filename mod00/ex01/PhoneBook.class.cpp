@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:12:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/25 19:21:56 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/04/26 11:34:40 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void		PhoneBook::searchcontact(void){
 	std::string	input;
 	int			index;
 
+	if (this->_nb_contact == 0){
+		std::cout << "PhoneBook empty, for now.. Please add some." << std::endl;
+		return ;
+	}
 	display_contact();
 	while (1){
 		std::cout << "Enter an index to display : ";
@@ -74,9 +78,9 @@ void		PhoneBook::searchcontact(void){
 		if (index < this->_nb_contact && check_number(input))
 			return(displaythecontact(index));
 		else if (!check_number(input))
-			std::cout << "Incorrect index format" << std::endl;
+			std::cout << "Incorrect index format." << std::endl;
 		else
-			std::cout << "This contact does not exist ('quit' to leave this action)" << std::endl;
+			std::cout << "This contact does not exist ('quit' to leave this action)." << std::endl;
 	}
 }
 
@@ -110,11 +114,15 @@ void	PhoneBook::get_contactinfo(void)
 			std::cout << "Enter your " << infos[i];
 			std::getline(std::cin, inputs[i]);
 			if (std::cin.eof()){
-				std::cout << std::endl << "Contact configuration failed";
+				std::cout << std::endl << "Contact configuration failed.";
 				return ;
 			}
 			if (i == 3 && !check_number(inputs[i])){
-				std::cout << "The phone number must composed only by numbers" << std::endl;
+				std::cout << "The phone number must be composed only by numbers." << std::endl;
+				inputs[i] = "";
+			}
+			else if (i == 3 && inputs[i].length() != 10){
+				std::cout << "The length of the phone number must be 10 digits." << std::endl;
 				inputs[i] = "";
 			}
 		}
