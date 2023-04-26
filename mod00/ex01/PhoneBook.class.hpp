@@ -6,10 +6,11 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:12:50 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/26 11:45:31 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:25:50 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef PHONEBOOK_CLASS_H
 # define PHONEBOOK_CLASS_H
 

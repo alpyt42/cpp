@@ -6,10 +6,11 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 16:39:44 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/25 16:28:18 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:25:56 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef CONTACT_CLASS_H
 # define CONTACT_CLASS_H
 
