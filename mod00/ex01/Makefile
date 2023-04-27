@@ -6,7 +6,7 @@
 #    By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 11:44:32 by ale-cont          #+#    #+#              #
-#    Updated: 2023/04/24 16:54:38 by ale-cont         ###   ########.fr        #
+#    Updated: 2023/04/27 16:18:04 by ale-cont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ NC		= \033[0m
 
 #--header-----------------------#
 
-INC_DIR = ./
+HEADER_DIR = ./
+HEADER_NAMES = Contact.class.hpp PhoneBook.class.hpp
+HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 #--flag-------------------------#
 
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -I$(INC_DIR) -std=c++98
+CFLAGS		= -Wall -Wextra -Werror -I$(HEADER_DIR) -std=c++98
 DFLAGS		= -g3 -fsanitize=address
 RM			= rm
 RM_FLAGS	= -rf
@@ -50,7 +52,7 @@ OBJS	= $(SRCS:.cpp=.o)
 
 #--compilation-rules-----------#
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	@printf "${MAG}[Compiling] ${CYAN}$<${MAG}\t\t\t\t\t${GREEN}[✓]${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"

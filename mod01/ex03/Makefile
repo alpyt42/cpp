@@ -6,14 +6,14 @@
 #    By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 11:44:32 by ale-cont          #+#    #+#              #
-#    Updated: 2023/04/27 17:58:31 by ale-cont         ###   ########.fr        #
+#    Updated: 2023/04/27 16:22:18 by ale-cont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 #--variables---------------------#
 
-NAME	= Zombie
+NAME	= Weapon
 DEBUG	= no
 
 #--color-------------------------#
@@ -30,7 +30,7 @@ NC		= \033[0m
 #--header-----------------------#
 
 HEADER_DIR = ./
-HEADER_NAMES = Zombie.hpp
+HEADER_NAMES = HumanA.hpp HumanB.hpp Weapon.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 #--flag-------------------------#
@@ -47,12 +47,12 @@ endif
 
 #--srcs------------------------#
 
-SRCS	= main.cpp Zombie.cpp zombieHorde.cpp
+SRCS	= main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 #--compilation-rules-----------#
 
-%.o: %.cpp ${HEADERS}
+%.o: %.cpp $(HEADERS)
 	@printf "${MAG}[Compiling] ${CYAN}$<${MAG}\t\t\t\t\t${GREEN}[✓]${NC}"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "${GREEN} OK!${NC}\n"
