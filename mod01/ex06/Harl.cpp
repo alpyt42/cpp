@@ -6,18 +6,13 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:03:22 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/02 16:15:56 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:28:50 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
-Harl::Harl(void){
-	levels[0] = &Harl::debug;
-	levels[1] = &Harl::info;
-	levels[2] = &Harl::warning;
-	levels[3] = &Harl::error;
-}
+Harl::Harl(void){}
 
 Harl::~Harl(void){}
 
