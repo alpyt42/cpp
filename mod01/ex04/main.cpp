@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 18:01:10 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/28 14:03:49 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:55:16 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ bool checkArguments(int argc, char **argv) {
 		return false;
 	}
 
+	if (std::string(argv[2]) == std::string(argv[3])) {
+		std::cerr << "Please provide different strings" << std::endl;
+		return false;
+	}
+	
 	return true;
 }
 
@@ -46,28 +51,32 @@ bool openFiles(std::ifstream& ifs, std::ofstream& ofs, char **argv) {
 }
 
 int findAndReplace(std::ifstream& ifs, std::ofstream& ofs, char **argv) {
-	std::string	line;
-	std::string	newline;
-	size_t		pos;
-	size_t		start_pos;
+	char	c;
+	std::string	line = "";
+	std::string	newline = "";
+	std::string	restline = "";
+	size_t		pos = 0;
 	size_t		count = 0;
-	while (std::getline(ifs, line)) {
-		start_pos = 0;
-		newline = "";
-		while (true) {
-			pos = line.find(argv[2], start_pos);
-			if (pos == std::string::npos) {
-				newline += line.substr(start_pos);
-				break;
-			} else {
-				newline += line.substr(start_pos, pos - start_pos);
-				newline += argv[3];
-				start_pos = pos + std::string(argv[2]).length();
-				count++;
-			}
+	size_t		start_pos = 0;
+
+	while (ifs.get(c))
+		line += c;
+	while (true) {
+		pos = line.find(argv[2], start_pos);
+		if (pos == std::string::npos) {
+			newline += line.substr(start_pos);
+			break;
+		} else {
+			newline += line.substr(start_pos, pos - start_pos);
+			newline += argv[3];
+			restline = newline;
+			restline += line.substr(pos + std::string(argv[2]).length());
+			line = restline;
+			start_pos = pos + std::string(argv[3]).length();
+			count++;
 		}
-		ofs << newline << std::endl;
 	}
+	ofs << line;
 	return count;
 }
 

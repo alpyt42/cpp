@@ -6,17 +6,13 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:03:25 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/28 16:28:40 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:11:55 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef HARL_H
-# define HARL_H
 
-#include <string.h>
 #include <iostream>
-#include <map>
 
 class Harl {
 	public:
@@ -24,12 +20,12 @@ class Harl {
 		~Harl(void);
 
 	void	complain( std::string level );
+	typedef void (Harl::*fct)();
+
 	private :
 		void	debug( void );
 		void	info( void );
 		void	warning( void );
 		void	error( void );
-		std::map<std::string, void (Harl::*)()> levels;
+		fct levels[4];
 };
-
-#endif

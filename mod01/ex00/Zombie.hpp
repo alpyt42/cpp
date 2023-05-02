@@ -6,13 +6,11 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 16:07:57 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/26 17:26:28 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/02 16:06:15 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
 
 #include <iostream>
 
@@ -28,5 +26,3 @@ class Zombie {
 
 void	randomChump(std::string name);
 Zombie*	newZombie(std::string name);
-
-#endif

@@ -6,17 +6,17 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 15:03:22 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/04/28 16:50:50 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/02 13:21:50 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
 
 Harl::Harl(void){
-	levels["DEBUG"] = &Harl::debug;
-	levels["INFO"] = &Harl::info;
-	levels["WARNING"] = &Harl::warning;
-	levels["ERROR"] = &Harl::error;
+	levels[0] = &Harl::debug;
+	levels[1] = &Harl::info;
+	levels[2] = &Harl::warning;
+	levels[3] = &Harl::error;
 }
 
 Harl::~Harl(void){}
@@ -39,6 +39,9 @@ void	Harl::error( void ) {
 
 void	Harl::complain(std::string level)
 {
-	if (levels.find(level) != levels.end())
-		(this->*levels[level])();
+	std::string	tab[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (int i = 0; i < 4; i++) {
+		if (level == tab[i])
+			(this->*levels[i])();
+	}
 }
