@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 11:43:14 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/04 18:58:34 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:47:00 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ ScavTrap::ScavTrap(const ScavTrap& other) : ClapTrap(other._name){
 	_hit = other._hit;
 	_energy = other._energy;
 	_attack = other._attack;
-	std::cout << "ScavTrap " << _name << " : Look out everybody, things are about to get awesome!" << std::endl;
+	std::cout << "ScavTrap " << _name << " : Copy Constructor called!" << std::endl;
 }
 
 ScavTrap::~ScavTrap()

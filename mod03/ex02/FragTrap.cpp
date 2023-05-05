@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 18:45:14 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/04 18:58:13 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:46:42 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ FragTrap::FragTrap(const FragTrap& other) : ClapTrap(other._name){
 	_hit = other._hit;
 	_energy = other._energy;
 	_attack = other._attack;
-	std::cout << "FragTrap " << _name << " : Look out everybody, things are about to get awesome!" << std::endl;
+	std::cout << "FragTrap " << _name << " : Copy Constructor called!" << std::endl;
 }
 
 FragTrap::~FragTrap()

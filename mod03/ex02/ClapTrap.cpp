@@ -6,26 +6,26 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:37:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/04 13:11:54 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 11:25:07 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0) {
+ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0){
 	std::cout << "ClavTrap " << _name << " : Constructor called" << std::endl;
 }
 
-ClapTrap::~ClapTrap() {
+ClapTrap::~ClapTrap(){
 	std::cout << "ClavTrap " << _name << " : Destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& other) :
-    _name(other._name),
-    _hit(other._hit),
-    _energy(other._energy),
-    _attack(other._attack) {
-    std::cout << "ClapTrap " << _name << " has been cloned!" << std::endl;
+ClapTrap::ClapTrap(const ClapTrap &other) : _name(other._name),
+											_hit(other._hit),
+											_energy(other._energy),
+											_attack(other._attack)
+{
+	std::cout << "ClapTrap " << _name << " has been cloned!" << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target){
