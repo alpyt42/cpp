@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:39:13 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/05 11:44:33 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:38:12 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 class Dog : public Animal {
 public:
-	Dog();
+	Dog(void);
 	Dog(const Dog& other);
-	~Dog();
+	~Dog(void);
+	Dog &	operator=(Dog const & other);
+	void	makeSound( void ) const;
 };

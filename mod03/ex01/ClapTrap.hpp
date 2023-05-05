@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:37:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/04 12:52:10 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 20:44:48 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@
 class ClapTrap
 {
 	public:
+		ClapTrap( void );
 		ClapTrap(std::string name);					// constructeur par défaut qui initialise la valeur à 0
 		~ClapTrap();								// destructeur
 		ClapTrap(const ClapTrap& other);
 
+		ClapTrap &	operator=( ClapTrap const & other );
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);

@@ -6,23 +6,25 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/05 12:18:38 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:32:27 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal(const std::string& name) : _type("Generic WrongAnimal"){
-	if (name == "Dog")
-		_type = "Dog";
-	else if (name == "Cat")
-		_type = "Cat";
-	std::cout << "WrongAnimal " << _type << " : Constructor called" << std::endl;
-}
-
 WrongAnimal::WrongAnimal() : _type("WrongAnimal"){
 	std::cout << "WrongAnimal " << _type << " : Constructor called" << std::endl;
 }
+
+WrongAnimal &	WrongAnimal::operator=( WrongAnimal const & other )
+{
+	std::cout << "WrongAnimal Assignment operator called" << std::endl;
+	if (this != &other) {
+		_type = other._type;
+	}
+	return (*this);
+}
+
 
 WrongAnimal::~WrongAnimal() {
 	std::cout << "WrongAnimal " << _type << " : Destructor called" << std::endl;
@@ -37,8 +39,5 @@ std::string	WrongAnimal::getType(void) const {
 }
 
 void	WrongAnimal::makeSound(void) const{
-	if (_type == "WrongCat")
-		std::cout << "WrongAnimal " << _type << " sound : Woof" << std::endl;
-	else
-		std::cout << "WrongAnimal " << _type << " sound : WrongAnimal sound!" << std::endl;
+	std::cout << "WrongAnimal " << _type << " sound : WrongAnimal sound!" << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:37:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/04 12:54:22 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 20:43:08 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,28 @@
 ClapTrap::ClapTrap(std::string name) : _name(name), _hit(10), _energy(10), _attack(0) {
 	std::cout << "ClapTrap " << _name << " : Constructor called" << std::endl;
 }
+
+ClapTrap::ClapTrap( void ) : _hit(10), _energy(10), _attack(0)
+{
+	this->_name = "Clap_default";
+	std::cout << "ClapTrap " << _name << " : Constructor called" << std::endl;
+}
+
+
+ClapTrap &	ClapTrap::operator=( ClapTrap const & other )
+{
+	std::cout << "ClapTrap assignment operator called" << std::endl;
+
+	if (this != &other)
+	{
+		this->_name			= other._name;
+		this->_hit	= other._hit;
+		this->_energy	= other._energy;
+		this->_attack	= other._attack;
+	}
+	return (*this);
+}
+
 
 ClapTrap::~ClapTrap() {
 	std::cout << "ScavTrap " << _name << " : Destructor called" << std::endl;

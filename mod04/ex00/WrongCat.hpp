@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:05:07 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/05 12:05:36 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:25:52 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 
 class WrongCat : public WrongAnimal {
 public:
-	WrongCat();
+	WrongCat(void);
 	WrongCat(const WrongCat& other);
-	~WrongCat();
+	~WrongCat(void);
+	WrongCat &	operator=(WrongCat const & other);
+	void	makeSound(void) const;
 };

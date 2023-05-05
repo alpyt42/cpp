@@ -6,21 +6,22 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:25:45 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/05 11:58:53 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:34:37 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Animal.hpp"
 
-Animal::Animal(const std::string& name) : _type("Generic Animal"){
-	if (name == "Dog")
-		_type = "Dog";
-	else if (name == "Cat")
-		_type = "Cat";
-	std::cout << "Animal " << _type << " : Constructor called" << std::endl;
+Animal &	Animal::operator=( Animal const & other )
+{
+	std::cout << "Animal Assignment operator called" << std::endl;
+	if (this != &other) {
+		_type = other._type;
+	}
+	return (*this);
 }
 
-Animal::Animal() : _type("animal"){
+Animal::Animal() : _type("Generic Animal"){
 	std::cout << "Animal " << _type << " : Constructor called" << std::endl;
 }
 
@@ -28,8 +29,9 @@ Animal::~Animal() {
 	std::cout << "Animal " << _type << " : Destructor called" << std::endl;
 }
 
-Animal::Animal(const Animal& other) : _type(other._type){
+Animal::Animal(const Animal& other){
 	std::cout << "Animal " << _type << " : Copy Constructor called" << std::endl;
+	*this = other;
 }
 
 std::string	Animal::getType(void) const {
@@ -37,10 +39,5 @@ std::string	Animal::getType(void) const {
 }
 
 void	Animal::makeSound(void) const{
-	if (_type == "Dog")
-		std::cout << "Animal " << _type << " sound : Woof" << std::endl;
-	else if (_type == "Cat")
-		std::cout << "Animal " << _type << " sound : Meow" << std::endl;
-	else
-		std::cout << "Animal " << _type << " sound : Animal sound!" << std::endl;
+	std::cout << "Animal " << _type << " sound : Animal sound!" << std::endl;
 }
