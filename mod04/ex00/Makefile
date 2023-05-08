@@ -6,7 +6,7 @@
 #    By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 11:44:32 by ale-cont          #+#    #+#              #
-#    Updated: 2023/05/05 12:09:30 by ale-cont         ###   ########.fr        #
+#    Updated: 2023/05/08 14:55:23 by ale-cont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ NC		= \033[0m
 #--header-----------------------#
 
 HEADER_DIR = ./
-HEADER_NAMES = Animal.hpp Dog.hpp Cat.hpp WrongCat.hpp WrongAnimal.cpp
+HEADER_NAMES = Animal.hpp Dog.hpp Cat.hpp WrongCat.hpp WrongAnimal.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 #--flag-------------------------#
