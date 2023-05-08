@@ -6,14 +6,14 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/05 21:32:27 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/08 17:02:38 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal() : _type("WrongAnimal"){
-	std::cout << "WrongAnimal " << _type << " : Constructor called" << std::endl;
+	std::cout << "WrongAnimal : Constructor called" << std::endl;
 }
 
 WrongAnimal &	WrongAnimal::operator=( WrongAnimal const & other )
@@ -27,11 +27,11 @@ WrongAnimal &	WrongAnimal::operator=( WrongAnimal const & other )
 
 
 WrongAnimal::~WrongAnimal() {
-	std::cout << "WrongAnimal " << _type << " : Destructor called" << std::endl;
+	std::cout << "WrongAnimal : Destructor called" << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other) : _type(other._type){
-	std::cout << "WrongAnimal " << _type << " : Copy Constructor called" << std::endl;
+	std::cout << "WrongAnimal : Copy Constructor called" << std::endl;
 }
 
 std::string	WrongAnimal::getType(void) const {

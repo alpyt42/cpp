@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:38:50 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/08 17:23:55 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:01:02 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,7 @@ class Cat : public Animal {
 		~Cat(void);
 		Cat &	operator=(Cat const & other);
 		void	makeSound( void ) const;
+		Brain*	getBrain( void );
+	private:
+		Brain*	_brain;
 };
