@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:37:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/02 20:49:16 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/09 12:38:31 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,6 @@ int		Fixed::toInt( void ) const {
 }
 
 std::ostream&	operator<<(std::ostream& os, const Fixed& fixed) {
-    os << fixed.toFloat();
+	os << fixed.toFloat();
 	return os;
 }
