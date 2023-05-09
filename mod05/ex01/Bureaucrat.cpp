@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:25:45 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/09 14:31:42 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:23:14 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ Bureaucrat &	Bureaucrat::operator=( Bureaucrat const & other )
 	return (*this);
 }
 
-Bureaucrat::Bureaucrat(void){
-	_name = "no_name";
-	_grade = 75;
-}
-
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade(grade){
 	if (_grade < 1)
 		throw GradeTooHighException();
@@ -33,7 +28,7 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name), _grade
 }
 
 Bureaucrat::~Bureaucrat(void) {
-
+	
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other.getName()){
@@ -59,4 +54,16 @@ int	Bureaucrat::getGrade(void) const { return _grade; }
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
 		os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
 		return os;
+}
+
+void	Bureaucrat::signForm(Form &form) {
+	try
+	{
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << getName() << " couldn't signed " << form.getName() << " because: " << e.what() << std::endl;
+	}
 }
