@@ -6,24 +6,23 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 13:58:02 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/10 14:00:15 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:08:34 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
-class Intern : public Form
+class Intern
 {
 	public:
-		Intern(const std::string& target);
+		Intern(void);
 		Intern(const Intern& other);
 		~Intern(void);
 
 		Intern&	operator=( Intern const & other );
-		void	execute(Bureaucrat const & executor) const;
-		Form&	makeForm(std::string nameForm, std::string str2);
-	private:
-		std::string	_target;
+		Form*	makeForm(std::string nameForm, std::string target);
 };

@@ -6,14 +6,14 @@
 #    By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/24 11:44:32 by ale-cont          #+#    #+#              #
-#    Updated: 2023/05/09 18:09:52 by ale-cont         ###   ########.fr        #
+#    Updated: 2023/05/10 19:06:25 by ale-cont         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .SILENT:
 #--variables---------------------#
 
-NAME	= Presidential
+NAME	= Intern
 DEBUG	= no
 
 #--color-------------------------#
@@ -30,7 +30,7 @@ NC		= \033[0m
 #--header-----------------------#
 
 HEADER_DIR = ./
-HEADER_NAMES = Bureaucrat.hpp Form.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp
+HEADER_NAMES = Bureaucrat.hpp Form.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
 HEADERS = $(addprefix $(HEADER_DIR), $(HEADER_NAMES))
 
 #--flag-------------------------#
@@ -47,7 +47,7 @@ endif
 
 #--srcs------------------------#
 
-SRCS	= Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp
+SRCS	= Bureaucrat.cpp Form.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp Intern.cpp
 
 OBJS	= $(SRCS:.cpp=.o)
 
