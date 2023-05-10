@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:25:45 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/10 00:23:02 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:47:32 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ std::string	Bureaucrat::getName(void) const { return _name; }
 int	Bureaucrat::getGrade(void) const { return _grade; }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat) {
-		os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+		os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;
 		return os;
 }
 

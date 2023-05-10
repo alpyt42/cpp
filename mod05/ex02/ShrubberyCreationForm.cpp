@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:10:38 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/09 23:40:03 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:19:43 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,25 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const {
 	if (!ofs.is_open())
 		throw std::runtime_error("Failed to create file: " + filename);
 	else {
-		ofs << "ASCII trees\n";
+		ofs << 
+    			"#   # ##### #     #      ###         ###   ###   ###  ##### #####\n"
+    			"#   # #     #     #     #   #       #   # #     #   #   #     #      \n"
+    			"##### ####  #     #     #   #       #####  ###  #       #     #  \n"
+    			"#   # #     #     #     #   #       #   #     # #   #   #     #      \n"
+    			"#   # ##### ##### #####  ###        #   #  ###   ###  ##### #####\n\n"
+    			"    oxoxoo    ooxoo\n"
+    			"ooxoxo oo  oxoxooo\n"
+    			" oooo xxoxoo ooo ooox\n"
+    			" oxo o oxoxo  xoxxoxo\n"
+    			"  oxo xooxoooo o ooo\n"
+    			"    ooo\\oo\\  /o/o\n"
+    			"        \\  /\\// /\n"
+    			"         |   /\n"
+    			"         |  |\n"
+    			"         |  |\n"
+    			"         |  |\n"
+    			"         |  |\n"
+    			"  ______/____\\____\n";
 		ofs.close();
 	}
 }
