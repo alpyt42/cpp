@@ -1,95 +1,133 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/11 17:08:41 by ale-cont          #+#    #+#             */
+/*   Updated: 2023/05/11 18:00:56 by ale-cont         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
-#include <sstream>
-#include <limits>
-#include <cmath>
+#include <string>
+#include <cstdlib>
+#include <climits>
 
-bool isDisplayableChar(char c) {
-    return (c >= 32 && c <= 126);
+static int	checkformat(std::string scalar) {
+	int	countdot = 0;
+	if (scalar.size() == 1)
+		return 0;
+	for (int i = 0; scalar[i]; i++) {
+		if (scalar[i] == '.')
+			countdot++;
+		if ((scalar[i] != 'f' && scalar[i] != '.' && !isdigit(scalar[i])) || countdot > 1) {
+			std::cout << "Please provide a valid literal\n";
+			return 1;
+		}
+	}
+	return 0;
 }
 
-char convertToChar(const std::string& literal) {
-    if (literal.size() == 3 && literal[0] == '\'') {
-        char c = literal[1];
-        if (isDisplayableChar(c)) {
-            return c;
-        }
-    }
-    std::cout << "char: Non displayable" << std::endl;
-    return '\0';
+static int specialtypes(std::string scalar) {
+	if (scalar == "nan" || scalar == "nanf")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+		return (1);
+	}
+	else if (scalar == "+inf" || scalar == "inf" || scalar == "inff" || scalar == "+inff")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: inff" << std::endl;
+		std::cout << "double: inf" << std::endl;
+		return (1);
+	}
+	else if (scalar == "-inf" || scalar == "-inff")
+	{
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: -inff" << std::endl;
+		std::cout << "double: -inf" << std::endl;
+		return (1);
+	}
+	return (0);
 }
 
-int convertToInt(const std::string& literal) {
-    std::istringstream iss(literal);
-    int value;
-    iss >> value;
-    if (iss.fail()) {
-        std::cout << "int: Impossible" << std::endl;
-        return 0;
-    }
-    return value;
+int	convertAndDisplay(std::string scalar) {
+	std::string toChar = "";
+	int toInt = 0;
+	float toFloat = 0;
+	double toDouble = 0;
+
+	if (specialtypes(scalar))
+		return 0;
+	if (checkformat(scalar))
+		return 1;
+	//if is a char
+	if (scalar.size() == 1 && std::isprint(scalar[0]) && !std::isdigit(scalar[0])) {
+		toChar = scalar[0];
+		std::cout << "char: " << toChar << std::endl;
+		std::cout << "int: " << static_cast<int>(toChar[0]) << std::endl;
+		std::cout << "float: " << static_cast<float>(toChar[0]) << ".0f" << std::endl;
+		std::cout << "double: " << static_cast<double>(toChar[0]) << ".0" << std::endl;
+		return 0;
+	}
+
+	//else if it is a number
+	toInt = std::atoi(scalar.c_str());
+
+	// check if it is float or int / double
+	if (scalar[scalar.length() - 1] == 'f') {
+		toFloat = std::atof(scalar.c_str());
+		toDouble = static_cast<double>(toFloat);
+	} else {
+		toDouble = std::atof(scalar.c_str());
+		toFloat = static_cast<float>(toDouble);
+	}
+
+	if (toChar == "" && std::isprint(toInt)) {
+		toChar = "'";
+		toChar += static_cast<char>(toInt);
+		toChar += "'";
+	} else if (toChar == "") {
+		toChar = "Non displayable";
+	}
+
+	std::cout << "char: " << toChar << std::endl;
+	if (toChar == "imposible") {
+		std::cout << "int: imposible" << std::endl;
+	} else {
+		std::cout << "int: " << toInt << std::endl;
+	}
+
+	if (toChar == "imposible" && toFloat == 0) {
+		std::cout << "float: imposible" << std::endl;
+		std::cout << "double: imposible" << std::endl;
+	} else {
+		if (toChar != "imposible" && toFloat - static_cast<int>(toFloat) == 0) {
+			std::cout << "float: " << toFloat << ".0f" << std::endl;
+			std::cout << "double: " << toDouble << ".0" << std::endl;
+		} else {
+			std::cout << "float: " << toFloat << "f" << std::endl;
+			std::cout << "double: " << toDouble << std::endl;
+		}
+	}
+	return 0;
 }
 
-float convertToFloat(const std::string& literal) {
-    std::istringstream iss(literal);
-    float value;
-    iss >> value;
-    if (iss.fail()) {
-        std::cout << "float: Impossible" << std::endl;
-        return 0.0f;
-    }
-    return value;
-}
+int main(int ac, char **av) {
+	int	ex = 0;
 
-double convertToDouble(const std::string& literal) {
-    std::istringstream iss(literal);
-    double value;
-    iss >> value;
-    if (iss.fail()) {
-        std::cout << "double: Impossible" << std::endl;
-        return 0.0;
-    }
-    return value;
-}
-
-int main(int argc, char* argv[]) {
-    if (argc < 2) {
-        std::cout << "No literal provided." << std::endl;
-        return 1;
-    }
-
-    std::string literal(argv[1]);
-
-    char c = '\0';
-    int i = 0;
-    float f = 0.0f;
-    double d = 0.0;
-
-    if (literal.size() == 3 && literal[0] == '\'') {
-        c = convertToChar(literal);
-        if (c != '\0') {
-            i = static_cast<int>(c);
-            f = static_cast<float>(c);
-            d = static_cast<double>(c);
-        }
-    }
-    else {
-        i = convertToInt(literal);
-        c = static_cast<char>(i);
-        f = static_cast<float>(i);
-        d = static_cast<double>(i);
-    }
-
-    std::cout << "char: ";
-    if (c != '\0') {
-        std::cout << "'" << c << "'" << std::endl;
-    }
-    else {
-        std::cout << i << std::endl;
-    }
-
-    std::cout << "int: " << i << std::endl;
-    std::cout << "float: " << f << "f" << std::endl;
-    std::cout << "double: " << d << std::endl;
-
-    return 0;
+	if (ac != 2) {
+		std::cout << "Please provide only one argument like : ./convert 3\n";
+		return 1;
+	}
+	std::string	scalar(av[1]);
+	ex = convertAndDisplay(scalar);
+	return (ex);
 }
