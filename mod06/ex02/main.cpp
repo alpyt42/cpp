@@ -6,13 +6,13 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:56:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/12 19:05:08 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:07:19 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Base.hpp"
 
-Base *generate()
+Base *generate(void)
 {
 	int randomNum = std::rand() % 3;
 
@@ -33,11 +33,11 @@ Base *generate()
 	return NULL;
 }
 
-void identify(Base *totest)
+void identify(Base *p)
 {
-	A *derivedPtrA = dynamic_cast<A *>(totest);
-	B *derivedPtrB = dynamic_cast<B *>(totest);
-	C *derivedPtrC = dynamic_cast<C *>(totest);
+	A *derivedPtrA = dynamic_cast<A *>(p);
+	B *derivedPtrB = dynamic_cast<B *>(p);
+	C *derivedPtrC = dynamic_cast<C *>(p);
 	
 	if (derivedPtrA)
 		std::cout << "A" << std::endl;
@@ -47,11 +47,11 @@ void identify(Base *totest)
 		std::cout << "C" << std::endl;
 }
 
-void identify(Base &totest)
+void identify(Base &p)
 {
 	try
 	{
-		dynamic_cast<A &>(totest);
+		dynamic_cast<A &>(p);
 		std::cout << "A" << std::endl;
 		return;
 	}
@@ -61,7 +61,7 @@ void identify(Base &totest)
 
 	try
 	{
-		dynamic_cast<B &>(totest);
+		dynamic_cast<B &>(p);
 		std::cout << "B" << std::endl;
 		return;
 	}
@@ -71,7 +71,7 @@ void identify(Base &totest)
 
 	try
 	{
-		dynamic_cast<C &>(totest);
+		dynamic_cast<C &>(p);
 		std::cout << "C" << std::endl;
 		return;
 	}
