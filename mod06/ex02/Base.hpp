@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:56:50 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/12 17:18:24 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:02:50 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <typeinfo>
 
 class Base
 {

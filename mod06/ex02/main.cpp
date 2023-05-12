@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:56:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/12 17:38:38 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/12 19:05:08 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void identify(Base &totest)
 		std::cout << "A" << std::endl;
 		return;
 	}
-	catch (...) {
+	catch (std::bad_cast &bc) {
+		std::cout << bc.what() << " for A\n";
 	}
 
 	try
@@ -64,7 +65,8 @@ void identify(Base &totest)
 		std::cout << "B" << std::endl;
 		return;
 	}
-	catch (...) {
+	catch (std::bad_cast &bc) {
+		std::cout << bc.what() << " for B\n";
 	}
 
 	try
@@ -73,7 +75,8 @@ void identify(Base &totest)
 		std::cout << "C" << std::endl;
 		return;
 	}
-	catch (...) {
+	catch (std::bad_cast &bc) {
+		std::cout << bc.what() << " for C\n";
 	}
 }
 
