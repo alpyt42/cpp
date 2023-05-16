@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 19:33:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/15 20:04:49 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/16 20:23:48 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <list>
 #include <vector>
 #include <algorithm>
+#include <limits.h>
+#include <ctime>
 
 class Span {
 public:
@@ -34,10 +36,23 @@ public:
 	Span&	operator=(Span const & other);
 	~Span(void);
 
-	void			addNumber(unsigned int& nb);
+	void			addNumber(int nb);
 	unsigned int	shortestSpan(void) const;
 	unsigned int	longestSpan(void) const;
+	template <typename InputIterator>
+	void	addNumbers(InputIterator first, InputIterator last) {
+		while (first != last)
+		{
+			addNumber(*first);
+			++first;
+		}
+	}
+	//getters
+	int				getNb(unsigned int id) const;
+	const std::vector<int>& getNumbers(void) const;
 private:
 	unsigned int		_N;
 	std::vector<int>	_vec;
 };
+
+std::ostream &operator<<(std::ostream &os, const Span &sp);
