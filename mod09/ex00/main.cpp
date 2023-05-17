@@ -6,15 +6,11 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:18 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/17 17:05:27 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/17 18:54:27 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
-
-static bool	openfiles(std::ifstream& ifs, std::ifstream& datacsv) {
-	return true;
-}
 
 static bool	checkfiles(char **av, std::ifstream& ifs) {
 	ifs.open(av[1]);
@@ -39,16 +35,21 @@ static bool	checkcsv(int ac, std::ifstream& datacsv) {
 }
 
 int	main(int ac, char **av) {
-	std::ifstream ifs;
-	std::ifstream datacsv;
+	std::ifstream	ifs;
+	std::ifstream	datacsv;
+	Bitcoin			btc;
 
 	if (!checkcsv(ac, datacsv))
 		return 1;
 	if (!checkfiles(av, ifs))
 		return 1;
-	if (!openfiles(ifs, datacsv))
+	if (!btc.fill_csv(datacsv))
 		return 1;
-	ifs.close();
+	if (!btc.fill_input(ifs))
+		return 1;
+	if (!btc.display_res())
+		return 1;
 	datacsv.close();
+	ifs.close();
 	return 0;
 }
