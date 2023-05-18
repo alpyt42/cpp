@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:20 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 01:44:16 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:00:46 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <ctime>
 #include <limits.h>
+#include <iomanip>
+#include <sstream>
 
 class Bitcoin {
 public:

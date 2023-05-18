@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 10:23:08 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:03:51 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ Bitcoin::~Bitcoin(void) {
 	
 }
 
+static bool isDateValid(int year, int month, int day) {
+	std::tm date = {0, 0, 0, day, month - 1, year - 1900, 0, 0, 0, 0, NULL};
+	std::time_t time = std::mktime(&date);
+	return (time != -1) && (date.tm_year == year - 1900) && (date.tm_mon == month - 1) && (date.tm_mday == day);
+}
+
 static bool	checkdate(std::string date) {
 	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
 		return (std::cout << "Error: not a valid date => " << date << std::endl, false);
@@ -48,7 +54,8 @@ static bool	checkdate(std::string date) {
 			return (std::cout << "Error: not a valid date. => " << date << std::endl, false);
 	}
 	if ((atof(year.c_str()) > 2022 || atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
-		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) || (date < "2009-01-02"))
+		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) ||
+		(date < "2009-01-02") || !isDateValid(atof(year.c_str()), atof(month.c_str()), atof(day.c_str())))
 			return (std::cout << "Error: not a valid date ( 2009-01-02 <= date <= 2022-12-31) => " << date << std::endl, false);
 	return true;
 }
