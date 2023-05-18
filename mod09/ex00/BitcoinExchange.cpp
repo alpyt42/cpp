@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/17 22:46:25 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 02:59:36 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ Bitcoin::Bitcoin(Bitcoin const &other){
 Bitcoin&	Bitcoin::operator=(Bitcoin const & other) {
 	if (this != &other) {
 		_database = other._database;
-		_inputxt = other._inputxt;
 	}
 	return *this;
 }
@@ -32,75 +31,104 @@ Bitcoin::~Bitcoin(void) {
 	
 }
 
-// static bool	openfile(std::ifstream& ifs) {
-// 	(void)ifs;
-// 	return true;
-// }
-
 static bool	checkdate(std::string date) {
-	if (date.size() != 10) {
-		std::cout << "Invalid date format (year-month-day)\n";
-		return false;
-	}
+	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+		return (std::cout << "Error: not a valid date.\n", false);
 
 	std::string	year = date.substr(0, 4);
 	std::string	month = date.substr(5, 2);
 	std::string	day = date.substr(8, 2);
 
 	for (int i = 0; i < 4; i++) {
-		if (i < 4 && !isdigit(year[i])) {
-			std::cerr << "Invalid year Format, should be digit\n";
-			return false;
-		}
-		if (i < 2 && !isdigit(month[i])) {
-			std::cerr << "Invalid month Format, should be digit\n";
-			return false;
-		}
-		if (i < 2 && !isdigit(day[i]))  {
-			std::cerr << "Invalid day Format, should be digit\n";
-			return false;
-		}
+		if (i < 4 && !isdigit(year[i]))
+			return (std::cout << "Error: not a valid date.\n", false);
+		if (i < 2 && !isdigit(month[i]))
+			return (std::cout << "Error: not a valid date.\n", false);
+		if (i < 2 && !isdigit(day[i]))
+			return (std::cout << "Error: not a valid date.\n", false);
 	}
 	if ((atof(year.c_str()) > 2022 || atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
-		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) ||
-		(date < "2009-01-02")) {
-			std::cerr << "Invalid date (2009-01-02 <= date <= 2022-12-31)\n";
+		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1))
 			return false;
-		}
+	if (date < "2009-01-02")
+		return (std::cout << "Error: not a valid date. (2009-01-02 <= Date <= 2022-12-31)\n", false);
 	return true;
 }
 
-static std::string	extractDate(std::string line) {
-	size_t pos = line.find(',');
-	if (pos != std::string::npos && checkdate(line.substr(0, pos)))
-		return line.substr(0, pos);
-	else if (pos == std::string::npos)
-		std::cerr << "Missing a ',' in a row\n";
+static bool	checkFormatSpace(std::string line, char c, int direc) {
+	if (direc == 0) {
+		for (int i = 0; line[i] && line[i + 1] && line[i + 1] != c; i++) {
+			if (line[i] && line[i + 1] && line[i] == ' ' && line[i + 1] != ' ')
+				return false;
+		}
+	}
+	if (direc == 1) {
+		for (int i = line.size(); i > 0; i--) {
+			if (line[i] == ' ' && line[i - 1] != ' ')
+				return false;
+		}
+	}
+	return true;
+}
+
+static std::string	extractDate(std::string line, char c) {
+	size_t pos = line.find(c);
+	if (pos == std::string::npos)
+		return (std::cout << "Error: bad input : " << line << std::endl, "");
+	std::string	line_tronc = line.substr(0, pos);
+	if (!checkFormatSpace(line, c, 0))
+		return (std::cout << "Error: bad input : " << line_tronc << std::endl, "");
+	pos = line.find(' ');
+	if (line_tronc.size() > 1)
+		line_tronc = line_tronc.substr(0, pos);
+	if (checkdate(line_tronc))
+		return line_tronc;
 	return "";
 }
 
-static std::string	extractExchange_rate(std::string line) {
-	size_t pos = line.find(',');
-	if (pos == std::string::npos) {
-		std::cerr << "Missing a ',' in a row\n";
-		return "";
-	}
-	if (line[pos + 1] == '\0') {
-		std::cerr << "Exchange_rate empty\n";
-		return "";
-	}
+static std::string	extractExchange_rate(std::string line, char c) {
+	size_t pos = line.find(c);
+	if (pos == std::string::npos)
+		return (std::cout << "Error: not a valid number.\n", "");
+	if (line[pos + 1] == '\0')
+		return (std::cout << "Error: not a valid number.\n", "");
 	std::string exchange_rate = line.substr(pos + 1);
+	if (!checkFormatSpace(exchange_rate, c, 1))
+		return (std::cout << "Error: invalid value : " << exchange_rate << std::endl, "");
+	for (int i = exchange_rate.size(); i >= 0; i--) {
+		if (exchange_rate[i] == ' ') {
+			exchange_rate = exchange_rate.substr(i + 1);
+			if (exchange_rate.size() == 0)
+				return (std::cout << "Error: not a valid number.\n", "");
+			break;
+		}
+	}
 	int	countdot = 0;
+	int	countf = 0;
+	int	sign = 1;
 	if (exchange_rate.size() == 1 && isdigit(exchange_rate[0]))
 		return exchange_rate;
+	if (exchange_rate[0] == '-') {
+		sign = -1;
+		exchange_rate = exchange_rate.substr(1);
+	}
+	else if (exchange_rate[0] == 'f' || exchange_rate[0] == '.')
+		return (std::cout << "Error: not a valid number.\n", "");
 	for (int i = 0; exchange_rate[i]; i++) {
 		if (exchange_rate[i] == '.')
 			countdot++;
-		if ((exchange_rate[i] != '.' && !isdigit(exchange_rate[i])) || countdot > 1
-			|| (exchange_rate[i] == '.' && exchange_rate[i + 1] == '\0')) {
-			return "";
+		if (exchange_rate[i] == 'f')
+			countf++;
+		if ((exchange_rate[i] != 'f' && exchange_rate[i] != '.' && !isdigit(exchange_rate[i])) || countdot > 1
+			|| (exchange_rate[i] == '.' && exchange_rate[i + 1] && exchange_rate[i + 1] == 'f') || countf > 1
+			|| (exchange_rate[i] == 'f' && exchange_rate[i + 1] != '\0') || (exchange_rate[i] == '.' && exchange_rate[i + 1] == '\0')) {
+			return (std::cout << "Error: not a valid number.\n", "");;
 		}
 	}
+	if (sign == -1)
+		return (std::cout << "Error: not a positive number.\n", "");
+	if (atof(exchange_rate.c_str()) > INT_MAX)
+		return (std::cout << "Error: too large a number.\n", "");
 	return exchange_rate;
 }
 
@@ -108,32 +136,64 @@ bool	Bitcoin::fill_csv(std::ifstream& datacsv) {
 	std::string	line;
 	std::string	date;
 	std::string	exchange_rate;
+	int			count = 0;
 
 	while (std::getline(datacsv, line)) {
 		if (line != "date,exchange_rate") {
-			date = extractDate(line);
+			date = extractDate(line, ',');
 			if (date.empty())
 				return false;
-			exchange_rate = extractExchange_rate(line);
+			exchange_rate = extractExchange_rate(line, ',');
 			if (exchange_rate.empty())
 				return false;
 			_database[date] = atof(exchange_rate.c_str());
 		}
+		else if (count > 0)
+			return false;
+		count++;
+	}
+	if (_database.size() == 0)
+		return false;
+	return true;
+}
+
+bool	Bitcoin::display_res(std::ifstream& ifs) const {
+	std::string	line;
+	std::string	date;
+	std::string	quantity = "";
+	int			count = 0;
+	int			status;
+
+	while (std::getline(ifs, line)) {
+		if (line != "date | value" && line.size() > 0) {
+			status = 0;
+			date = extractDate(line, '|');
+			if (date.empty())
+				status = 1;
+			if (status == 0)
+				quantity = extractExchange_rate(line, '|');
+			if (status == 0 && quantity.empty())
+				status = 1;
+			if (status == 0) {
+				std::map<std::string, float>::const_iterator it = _database.lower_bound(date);
+				 // If the date is not found, use the closest date (lower bound)
+				if (it == _database.end())
+					--it; // Move to the previous date
+				// Multiply the value with the exchange rate
+				float result = atof(quantity.c_str()) * it->second;
+				// Output the result
+				std::cout << date << " => " << quantity << " = " << result << std::endl;
+			}
+		}
+		else if (count > 0 && line == "date | value")
+			return false;
+		count++;
 	}
 	return true;
 }
 
-bool	Bitcoin::fill_input(std::ifstream& ifs){
-	(void)ifs;
-	return true;
-}
-
-bool	Bitcoin::display_res(void) const{
-	return true;
-}
-
 void	Bitcoin::displaydatabase(void) const {
-	std::map<std::string, double>::const_iterator iter;
+	std::map<std::string, float>::const_iterator iter;
 	for (iter = _database.begin(); iter != _database.end(); ++iter)
 		std::cout << iter->first << " => " << iter->second << std::endl;
 }

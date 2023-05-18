@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:18 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/17 22:39:45 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 01:50:26 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ int	main(int ac, char **av) {
 		return 1;
 	if (!checkfiles(av, ifs))
 		return 2;
-	if (!btc.fill_csv(datacsv))
+	if (!btc.fill_csv(datacsv)) {
+		std::cout << "Invalid 'data.csv', please check it\n";
 		return 3;
-	if (!btc.fill_input(ifs))
-		return 4;
-	if (!btc.display_res())
-		return 5;
+	}
 	// btc.displaydatabase();
+	if (!btc.display_res(ifs))
+		return 4;
 	datacsv.close();
 	ifs.close();
 	return 0;
