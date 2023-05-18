@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 11:03:51 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 11:36:34 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static std::string	extractDate(std::string line, char c) {
 		return (std::cout << "Error: bad input : " << line << std::endl, "");
 	std::string	line_tronc = line.substr(0, pos);
 	if (!checkFormatSpace(line, c, 0))
-		return (std::cout << "Error: bad input : " << line_tronc << std::endl, "");
+		return (std::cout << "Error: bad input (space issue): " << line_tronc << std::endl, "");
 	pos = line.find(' ');
 	if (line_tronc.size() > 1)
 		line_tronc = line_tronc.substr(0, pos);
@@ -99,7 +99,7 @@ static std::string	extractExchange_rate(std::string line, char c) {
 		return (std::cout << "Error: not a valid number.\n", "");
 	std::string exchange_rate = line.substr(pos + 1);
 	if (!checkFormatSpace(exchange_rate, c, 1))
-		return (std::cout << "Error: invalid value : " << exchange_rate << std::endl, "");
+		return (std::cout << "Error: invalid value (space issue): " << exchange_rate << std::endl, "");
 	for (int i = exchange_rate.size(); i >= 0; i--) {
 		if (exchange_rate[i] == ' ') {
 			exchange_rate = exchange_rate.substr(i + 1);
@@ -188,7 +188,7 @@ bool	Bitcoin::display_res(std::ifstream& ifs) const {
 			}
 		}
 		else if (count > 0 && line == "date | value")
-			return false;
+			return (std::cout << "Error: you must put 'date | value' only at the beginning of the file\n", false);
 		count++;
 	}
 	return true;
