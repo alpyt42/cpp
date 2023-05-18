@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 02:59:36 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 10:23:08 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Bitcoin::~Bitcoin(void) {
 
 static bool	checkdate(std::string date) {
 	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
-		return (std::cout << "Error: not a valid date.\n", false);
+		return (std::cout << "Error: not a valid date => " << date << std::endl, false);
 
 	std::string	year = date.substr(0, 4);
 	std::string	month = date.substr(5, 2);
@@ -41,17 +41,15 @@ static bool	checkdate(std::string date) {
 
 	for (int i = 0; i < 4; i++) {
 		if (i < 4 && !isdigit(year[i]))
-			return (std::cout << "Error: not a valid date.\n", false);
+			return (std::cout << "Error: not a valid date. => " << date << std::endl, false);
 		if (i < 2 && !isdigit(month[i]))
-			return (std::cout << "Error: not a valid date.\n", false);
+			return (std::cout << "Error: not a valid date. => " << date << std::endl, false);
 		if (i < 2 && !isdigit(day[i]))
-			return (std::cout << "Error: not a valid date.\n", false);
+			return (std::cout << "Error: not a valid date. => " << date << std::endl, false);
 	}
 	if ((atof(year.c_str()) > 2022 || atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
-		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1))
-			return false;
-	if (date < "2009-01-02")
-		return (std::cout << "Error: not a valid date. (2009-01-02 <= Date <= 2022-12-31)\n", false);
+		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) || (date < "2009-01-02"))
+			return (std::cout << "Error: not a valid date ( 2009-01-02 <= date <= 2022-12-31) => " << date << std::endl, false);
 	return true;
 }
 
@@ -176,12 +174,9 @@ bool	Bitcoin::display_res(std::ifstream& ifs) const {
 				status = 1;
 			if (status == 0) {
 				std::map<std::string, float>::const_iterator it = _database.lower_bound(date);
-				 // If the date is not found, use the closest date (lower bound)
 				if (it == _database.end())
-					--it; // Move to the previous date
-				// Multiply the value with the exchange rate
+					--it; // previous date if not found
 				float result = atof(quantity.c_str()) * it->second;
-				// Output the result
 				std::cout << date << " => " << quantity << " = " << result << std::endl;
 			}
 		}
