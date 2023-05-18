@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 11:36:34 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/18 14:12:33 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static bool	checkdate(std::string date) {
 	if ((atof(year.c_str()) > 2022 || atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
 		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) ||
 		(date < "2009-01-02") || !isDateValid(atof(year.c_str()), atof(month.c_str()), atof(day.c_str())))
-			return (std::cout << "Error: not a valid date ( 2009-01-02 <= date <= 2022-12-31) => " << date << std::endl, false);
+			return (std::cout << "Error: not a valid date (2009-01-02 <= date <= 2022-12-31) => " << date << std::endl, false);
 	return true;
 }
 
