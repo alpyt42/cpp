@@ -6,12 +6,27 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 12:02:57 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/19 17:11:46 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-int	main(void) {
+int main(int argc, char *argv[]) {
+	RPN	expression;
+	if (argc != 2)
+		return (std::cerr << "Usage: " << argv[0] << " <expression>" << std::endl, 1);
+
+	try
+	{
+		int result = expression.evaluateRPN(argv[1]);
+		std::cout << result << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Error: " << e.what() << std::endl;
+		return 1;
+	}
+
 	return 0;
 }
