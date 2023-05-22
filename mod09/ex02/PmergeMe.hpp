@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:52:58 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/22 18:13:30 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:45:12 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ public:
 
 	void	addNumbers(char **av);
 	void	printVec(void);
-	void	mergeInsertSort(void);
+	void	mergeInsertSortVec(void);
+	void	mergeInsertSortDeq(void);
 private:
 	PmergeMe & operator=(PmergeMe const & rhs);
 	PmergeMe(PmergeMe const &);

@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/22 17:56:42 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:56:12 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(int ac, char* av[])
 	nbs.addNumbers(av);
 	std::cout << "Before:\t";
 	nbs.printVec();
-	nbs.mergeInsertSort();
+	nbs.mergeInsertSortVec();
 	std::cout << "After:\t";
 	nbs.printVec();
 	return 0;

@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:52:55 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/22 18:12:23 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:53:39 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	PmergeMe::addNumbers(char **av) {
 	for (int i = 1; av[i]; i++) {
 		size_t	nb = std::strtoul(av[i], NULL, 10);
 		_vector.push_back(nb);
+		_dck.push_back(nb);
 	}
 }
 
@@ -39,6 +40,22 @@ void	PmergeMe::printVec(void) {
 	std::cout << std::endl;
 }
 
-void	PmergeMe::mergeInsertSort(void) {
+template<typename T>
+static void	InsertAlgo(T& A) {
+	T	beg = A.begin();
+	T	end = A.end();
+	
+}
+
+void	PmergeMe::mergeInsertSortDeq(void) {
+	
+}
+
+void	PmergeMe::mergeInsertSortVec(void) {
+	size_t	mid;
+	int		ths = (_vector.size() / 100) + 2;
+	
+	if (_vector.size() < ths)
+		return (InsertAlgo(_vector));
 	
 }
