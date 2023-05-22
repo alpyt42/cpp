@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:29 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/19 17:25:17 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/22 11:22:51 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,43 +44,36 @@ static int	performOperation(char operation, int nb1, int nb2) {
 	}
 }
 
-static bool	isOperator(const std::string &token) {
-	return (token == "+" || token == "-" || token == "*" || token == "/");
+static bool	isOperator(char c) {
+	return (c == '+' || c == '-' || c == '*' || c == '/');
 }
 
-// static bool	isCorrectExpression(const std::string &expression) {
-// 	for (int i = 0; expression[i]; i++) {
-// 		if (!isdigit(expression[i]))
-// 	}
-// }
-
 int RPN::evaluateRPN(const std::string &expression) {
-	std::istringstream iss(expression);
-	std::string token;
-
-	while (iss >> token)
-	{
-		if (isOperator(token))
-		{
+	for (int i = 0; expression[i]; i++) {
+		if (isdigit(expression[i])) {
+			int operand = expression[i] - '0';
+			_numbers.push(operand);
+		}
+		else if (isOperator(expression[i])) {
 			if (_numbers.size() < 2) {
-				throw std::runtime_error("Invalid expression");
+				throw std::runtime_error("Invalid expression: please enter enough digit to proceed");
 			}
 			int nb2 = _numbers.top();
 			_numbers.pop();
 			int nb1 = _numbers.top();
 			_numbers.pop();
-			int result = performOperation(token[0], nb1, nb2);
+			if (nb2 == 0 && expression[i] == '/') {
+				throw std::runtime_error("Division by zero.");
+			}
+			int result = performOperation(expression[i], nb1, nb2);
 			_numbers.push(result);
 		}
-		else
-		{
-			int operand;
-			std::istringstream(token) >> operand;
-			_numbers.push(operand);
+		else if (expression[i] != ' ') {
+			throw std::runtime_error("Invalid expression: Invalid element");
 		}
 	}
 	if (_numbers.size() != 1) {
-		throw std::runtime_error("Invalid expression");
+		throw std::runtime_error("Invalid expression : please enter enough digit to proceed");
 	}
 	return _numbers.top();
 }
