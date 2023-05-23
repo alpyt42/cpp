@@ -6,14 +6,14 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/23 16:38:18 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:42:15 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 static bool	checkArguments(int ac, char **av) {
-	if (ac < 2)
+	if (ac < 2 || (ac == 2 && strlen(av[1]) == 0))
 		return (std::cerr << "Error: No numbers found. Provide for example: ./PmergeMe 5 4 8 6 9" << std::endl, false);
 	for (int i = 1; av[i]; i++) {
 		if (strlen(av[i]) > 10)

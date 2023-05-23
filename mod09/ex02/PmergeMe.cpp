@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:52:55 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/23 17:37:10 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:44:08 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,19 @@ PmergeMe::PmergeMe(PmergeMe const & src) { (void)src; }
 
 void	PmergeMe::addNumberstoVec(char **av) {
 	for (int i = 1; av[i]; i++) {
-		size_t	nb = std::strtoul(av[i], NULL, 10);
-		_vector.push_back(nb);
+		if (strlen(av[i]) > 0) {
+			size_t	nb = std::strtoul(av[i], NULL, 10);
+			_vector.push_back(nb);
+		}
 	}
 }
 
 void	PmergeMe::addNumberstoDeq(char **av) {
 	for (int i = 1; av[i]; i++) {
-		size_t	nb = std::strtoul(av[i], NULL, 10);
-		_deq.push_back(nb);
+		if (strlen(av[i]) > 0) {
+			size_t	nb = std::strtoul(av[i], NULL, 10);
+			_deq.push_back(nb);
+		}
 	}
 }
 
