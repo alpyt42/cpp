@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/23 17:42:15 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:57:49 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int main(int ac, char* av[])
 	if (!checkArguments(ac, av))
 		return 1;
 	std::cout << "Vector Before:\t";
-	for (int i = 1; av[i] && i < 20; ++i) {
+	for (int i = 1; av[i] && i < 11; ++i) {
 		std::cout << av[i] << " ";
-		if (i == 19 && av[i + 1])
-			std::cout << "[...]";
 	}
+	if (ac > 11)
+		std::cout << "[...]";
 	std::cout << std::endl;
 	clock_t start = clock();
 	nbs.addNumberstoVec(av);
@@ -61,11 +61,11 @@ int main(int ac, char* av[])
 	if (!checkArguments(ac, av))
 		return 1;
 	std::cout << "Deque Before:\t";
-	for (int i = 1; av[i] && i < 20; ++i) {
+	for (int i = 1; av[i] && i < 11; ++i) {
 		std::cout << av[i] << " ";
-		if (i == 19 && av[i + 1])
-			std::cout << "[...]";
 	}
+	if (ac > 11)
+		std::cout << "[...]";
 	std::cout << std::endl;
 	start = clock();
 	nbs.addNumberstoDeq(av);
@@ -76,7 +76,7 @@ int main(int ac, char* av[])
 	nbs.printDeq();
 	if (nbs.isSorted("Deq")) {
 		std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque<size_t> : " << duration << " us.\n";
-		std::cout << "Deque is sorted\n\n";
+		std::cout << "Deque is sorted\n";
 	}
 	else
 		std::cout << "Deque is not sorted\n";

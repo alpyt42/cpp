@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:52:55 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/23 17:44:08 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:57:13 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ void	PmergeMe::addNumberstoDeq(char **av) {
 }
 
 void	PmergeMe::printVec(void) {
-	for (size_t i = 0; i < _vector.size() && i < 20; ++i) {
+	for (size_t i = 0; i < _vector.size() && i < 10; ++i) {
 		std::cout << _vector[i] << " ";
 	}
-	if (_vector.size() > 20)
+	if (_vector.size() > 10)
 		std::cout << "[...]";
 	std::cout << std::endl;
 }
 
 void	PmergeMe::printDeq(void) {
-	for (size_t i = 0; i < _deq.size() && i < 20; ++i) {
+	for (size_t i = 0; i < _deq.size() && i < 10; ++i) {
 		std::cout << _deq[i] << " ";
 	}
-	if (_deq.size() > 20)
+	if (_deq.size() > 10)
 		std::cout << "[...]";
 	std::cout << std::endl;
 }
