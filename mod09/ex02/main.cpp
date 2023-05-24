@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/23 17:57:49 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/24 11:25:21 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int main(int ac, char* av[])
 	if (ac > 11)
 		std::cout << "[...]";
 	std::cout << std::endl;
-	clock_t start = clock();
 	nbs.addNumberstoVec(av);
+	clock_t start = clock();
 	nbs.mergeInsertSortVec();
 	clock_t end = clock();
 	double duration = double (end - start) / CLOCKS_PER_SEC * 100000;
@@ -67,8 +67,8 @@ int main(int ac, char* av[])
 	if (ac > 11)
 		std::cout << "[...]";
 	std::cout << std::endl;
-	start = clock();
 	nbs.addNumberstoDeq(av);
+	start = clock();
 	nbs.mergeInsertSortDeq();
 	end = clock();
 	duration = double (end - start) / CLOCKS_PER_SEC * 100000;
