@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 17:08:41 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/12 15:37:25 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/25 12:58:32 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <string>
 #include <cstdlib>
 #include <climits>
+#include <cmath>
 
 static int	checkformat(std::string scalar) {
 	int	countdot = 0;
@@ -84,12 +85,18 @@ int	printchar(std::string scalar) {
 }
 
 void	printdouble(std::string scalar) {
-	double	dblvalue = std::strtod(scalar.c_str(), NULL);
-	if (dblvalue > 31.0f && dblvalue < 127.0f)
-		std::cout << "char: '" << static_cast<char>(dblvalue) << "'" << std::endl;
-	else
+	double dblvalue = std::strtod(scalar.c_str(), NULL);
+	int intValue = static_cast<int>(dblvalue);
+
+	double fractionalPart;
+	double integralPart = std::modf(dblvalue, &fractionalPart);
+
+	if (integralPart == 0.0 && dblvalue > 31.0 && dblvalue < 127.0) {
+		std::cout << "char: '" << static_cast<char>(intValue) << "'" << std::endl;
+	} else {
 		std::cout << "char: Not displayable" << std::endl;
-	if (dblvalue <= INT_MAX && dblvalue >= INT_MIN)
+	}
+	if (dblvalue <= 2147483647.0 && dblvalue >= INT_MIN)
 		std::cout << "int: " << static_cast<int>(dblvalue) << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
@@ -105,11 +112,16 @@ void	printdouble(std::string scalar) {
 
 void	printfloat(std::string scalar) {
 	float floatValue = std::strtof(scalar.c_str(), 0);
-	if (floatValue > 31.0f && floatValue < 127.0f)
-		std::cout << "char: '" << static_cast<char>(floatValue) << "'" << std::endl;
-	else
+	int intValue = static_cast<int>(floatValue);
+
+	float fractionalPart;
+	float integralPart = std::modf(floatValue, &fractionalPart);
+	if (integralPart == 0.0f && floatValue > 31.0f && floatValue < 127.0f) {
+		std::cout << "char: '" << static_cast<char>(intValue) << "'" << std::endl;
+	} else {
 		std::cout << "char: Not displayable" << std::endl;
-	if (floatValue <= INT_MAX && floatValue >= INT_MIN)
+	}
+	if (floatValue <= 2147483647.0f && floatValue >= INT_MIN)
 		std::cout << "int: " << static_cast<int>(floatValue) << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
@@ -131,12 +143,12 @@ void	printint(std::string scalar) {
 		std::cout << "char: '" << static_cast<char>(nb) << "'" << std::endl;
 	else
 		std::cout << "char: Not displayable" << std::endl;
-	if (nb <= INT_MAX && nb >= INT_MIN)
+	if (nb <= 2147483647 && nb >= INT_MIN)
 		std::cout << "int: " << static_cast<int>(nb) << std::endl;
 	else
 		std::cout << "int: impossible" << std::endl;
 	if (nb <= FLT_MAX && nb >= -FLT_MAX)
-		std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
+		std::cout << "float: " << static_cast<float>(nb) << ".0f" << std::endl;
 	else
 		std::cout << "float: impossible" << std::endl;
 	if (nb <= DBL_MAX && nb >= -DBL_MAX)
@@ -170,7 +182,7 @@ int main(int ac, char **av) {
 	if (scalar.size() == 1 && std::isprint(scalar[0]) && !std::isdigit(scalar[0]))
 		return (printchar(scalar));
 	// if it's a float or double:
-	if (scalar.find(".", 0) != std::string::npos) {
+	if (scalar.find(".", 0) != std::string::npos || scalar.find("f", 0) != std::string::npos) {
 		bool	isfloat;
 		stringToFloatOrDouble(scalar, &isfloat);
 		if (isfloat)
