@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 16:56:28 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/12 19:07:19 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:22:53 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,34 +49,33 @@ void identify(Base *p)
 
 void identify(Base &p)
 {
+	Base	res;
+
 	try
 	{
-		dynamic_cast<A &>(p);
+		res = dynamic_cast<A &>(p);
 		std::cout << "A" << std::endl;
 		return;
 	}
 	catch (std::bad_cast &bc) {
-		std::cout << bc.what() << " for A\n";
 	}
 
 	try
 	{
-		dynamic_cast<B &>(p);
+		res = dynamic_cast<B &>(p);
 		std::cout << "B" << std::endl;
 		return;
 	}
 	catch (std::bad_cast &bc) {
-		std::cout << bc.what() << " for B\n";
 	}
 
 	try
 	{
-		dynamic_cast<C &>(p);
+		res = dynamic_cast<C &>(p);
 		std::cout << "C" << std::endl;
 		return;
 	}
 	catch (std::bad_cast &bc) {
-		std::cout << bc.what() << " for C\n";
 	}
 }
 
