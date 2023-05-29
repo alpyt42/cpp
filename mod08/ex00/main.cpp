@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 17:42:43 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/15 19:26:48 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:19:16 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 int main() {
 	std::cout << "VECTOR : " << std::endl;
-	int arr[] = {1, 2, 3, 4, 5};
+	int arr[] = {1, 2, 3, 4, 3};
 	std::vector<int> numbers(arr, arr + sizeof(arr) / sizeof(arr[0]));
 	for (std::vector<int>::const_iterator it = numbers.begin(); it != numbers.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
-	std::cout << "*numbers.begin(): " << *numbers.begin() << ", *numbers.end(): " << *numbers.end() << std::endl;
 	try
 	{
 		int	tofind1 = 3;
@@ -40,7 +39,6 @@ int main() {
 	for (std::list<int>::const_iterator it = list.begin(); it != list.end(); it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
-	std::cout << "*list.begin(): " << *list.begin() << ", *list.end(): " << *(list.end()) << std::endl;
 	try
 	{
 		int	tofind2 = 15;
