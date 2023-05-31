@@ -6,7 +6,7 @@
 /*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 14:38:21 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/18 14:12:33 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/05/31 12:30:47 by ale-cont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ static std::string	extractExchange_rate(std::string line, char c) {
 		if ((exchange_rate[i] != 'f' && exchange_rate[i] != '.' && !isdigit(exchange_rate[i])) || countdot > 1
 			|| (exchange_rate[i] == '.' && exchange_rate[i + 1] && exchange_rate[i + 1] == 'f') || countf > 1
 			|| (exchange_rate[i] == 'f' && exchange_rate[i + 1] != '\0') || (exchange_rate[i] == '.' && exchange_rate[i + 1] == '\0')) {
-			return (std::cout << "Error: not a valid number.\n", "");;
+			return (std::cout << "Error: not a valid number.\n", "");
 		}
 	}
 	if (sign == -1)
@@ -184,7 +184,10 @@ bool	Bitcoin::display_res(std::ifstream& ifs) const {
 				if (it == _database.end())
 					--it; // previous date if not found
 				float result = atof(quantity.c_str()) * it->second;
-				std::cout << date << " => " << quantity << " = " << result << std::endl;
+				if (atof(quantity.c_str()) > 1000.0)
+					std::cout << "Error: not a valid number.\n";
+				else
+					std::cout << date << " => " << quantity << " = " << result << std::endl;
 			}
 		}
 		else if (count > 0 && line == "date | value")
