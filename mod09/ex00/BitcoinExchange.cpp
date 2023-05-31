@@ -34,6 +34,9 @@ Bitcoin::~Bitcoin(void) {
 static bool isDateValid(int year, int month, int day) {
 	std::tm date = {0, 0, 0, day, month - 1, year - 1900, 0, 0, 0, 0, NULL};
 	std::time_t time = std::mktime(&date);
+	std::time_t currentTime = std::time(NULL);
+	if (time > currentTime)
+		return false;
 	return (time != -1) && (date.tm_year == year - 1900) && (date.tm_mon == month - 1) && (date.tm_mday == day);
 }
 
@@ -53,10 +56,10 @@ static bool	checkdate(std::string date) {
 		if (i < 2 && !isdigit(day[i]))
 			return (std::cout << "Error: not a valid date. => " << date << std::endl, false);
 	}
-	if ((atof(year.c_str()) > 2022 || atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
+	if ((atof(month.c_str()) > 12 || atof(day.c_str()) > 31) ||
 		(atof(year.c_str()) < 2009 || atof(month.c_str()) < 1 || atof(day.c_str()) < 1) ||
 		(date < "2009-01-02") || !isDateValid(atof(year.c_str()), atof(month.c_str()), atof(day.c_str())))
-			return (std::cout << "Error: not a valid date (2009-01-02 <= date <= 2022-12-31) => " << date << std::endl, false);
+			return (std::cout << "Error: not a valid date (2009-01-02 <= date <= Today) => " << date << std::endl, false);
 	return true;
 }
 
@@ -185,7 +188,7 @@ bool	Bitcoin::display_res(std::ifstream& ifs) const {
 					--it; // previous date if not found
 				float result = atof(quantity.c_str()) * it->second;
 				if (atof(quantity.c_str()) > 1000.0)
-					std::cout << "Error: not a valid number.\n";
+					std::cout << "Error: not a valid number: " << quantity.c_str() << " (condition : 0.0 <= quantity <= 1000.0)\n";
 				else
 					std::cout << date << " => " << quantity << " = " << result << std::endl;
 			}
