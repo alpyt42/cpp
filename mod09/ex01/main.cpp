@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alric <alric@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:27 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/19 17:11:46 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:17:33 by alric            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 	try
 	{
-		int result = expression.evaluateRPN(argv[1]);
+		float result = expression.evaluateRPN(argv[1]);
 		std::cout << result << std::endl;
 	}
 	catch (const std::exception &e)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ale-cont <ale-cont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alric <alric@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:02:32 by ale-cont          #+#    #+#             */
-/*   Updated: 2023/05/22 10:47:09 by ale-cont         ###   ########.fr       */
+/*   Updated: 2023/06/02 11:15:40 by alric            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ public:
 	RPN&	operator=(RPN const & other);
 	~RPN(void);
 
-	int evaluateRPN(const std::string& expression);
+	float evaluateRPN(const std::string& expression);
 private:
-	std::stack<int>		_numbers;
+	std::stack<float>		_numbers;
 };
